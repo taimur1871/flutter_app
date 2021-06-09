@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "531760359986",
+    "firebase_url": "https://true-sunlight-282803-default-rtdb.firebaseio.com",
+    "project_id": "true-sunlight-282803",
+    "storage_bucket": "true-sunlight-282803.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531760359986:android:b9822bd3a1ba0eeb976a2b",
+        "android_client_info": {
+          "package_name": "com.flutterflow.bitwearapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531760359986-9n8gurtjho4kuqhksp8v2f8v7rh9j8r8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWp7dnJMOktM9HtrTFavca2TzaXLLr42g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531760359986-9n8gurtjho4kuqhksp8v2f8v7rh9j8r8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

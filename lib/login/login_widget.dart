@@ -1,5 +1,8 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +16,7 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController emailTextController;
   TextEditingController passwordTextController;
+  bool passwordVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -20,25 +24,27 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.initState();
     emailTextController = TextEditingController();
     passwordTextController = TextEditingController();
+    passwordVisibility = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            color: Color(0xFF110631),
+            color: Colors.black,
           ),
           child: Stack(
             children: [
               Align(
                 alignment: Alignment(0.06, -0.63),
-                child: Image.network(
-                  '',
+                child: Image.asset(
+                  'assets/images/White on Black Small.png',
                   width: 280,
                   height: 100,
                   fit: BoxFit.contain,
@@ -73,7 +79,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF908991),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -83,7 +89,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF908991),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -122,7 +128,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 alignment: Alignment(0, 0),
                                 child: TextFormField(
                                   controller: passwordTextController,
-                                  obscureText: true,
+                                  obscureText: !passwordVisibility,
                                   decoration: InputDecoration(
                                     hintText: 'Password',
                                     hintStyle: GoogleFonts.getFont(
@@ -132,7 +138,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF908991),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -142,12 +148,24 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF3C2452),
+                                        color: Color(0xFF908991),
                                         width: 2,
                                       ),
                                       borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(4.0),
                                         topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    suffixIcon: InkWell(
+                                      onTap: () => setState(
+                                        () => passwordVisibility =
+                                            !passwordVisibility,
+                                      ),
+                                      child: Icon(
+                                        passwordVisibility
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        size: 22,
                                       ),
                                     ),
                                   ),
@@ -177,8 +195,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
+                              onPressed: () async {
+                                final user = await createAccountWithEmail(
+                                  context,
+                                  emailTextController.text,
+                                  passwordTextController.text,
+                                );
+                                if (user == null) {
+                                  return;
+                                }
+
+                                await Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePageWidget(),
+                                  ),
+                                  (r) => false,
+                                );
                               },
                               text: 'Sign up',
                               options: FFButtonOptions(
@@ -192,7 +225,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   fontSize: 15,
                                 ),
                                 borderSide: BorderSide(
-                                  color: Color(0xFF553BBA),
+                                  color: Color(0xFF908991),
                                   width: 2,
                                 ),
                                 borderRadius: 0,
@@ -201,8 +234,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(35, 0, 0, 0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  final user = await signInWithEmail(
+                                    context,
+                                    emailTextController.text,
+                                    passwordTextController.text,
+                                  );
+                                  if (user == null) {
+                                    return;
+                                  }
+
+                                  await Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePageWidget(),
+                                    ),
+                                    (r) => false,
+                                  );
                                 },
                                 text: 'Sign in',
                                 options: FFButtonOptions(
@@ -216,7 +264,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     fontSize: 15,
                                   ),
                                   borderSide: BorderSide(
-                                    color: Color(0xFF553BBA),
+                                    color: Color(0xFF908991),
                                     width: 2,
                                   ),
                                   borderRadius: 0,
