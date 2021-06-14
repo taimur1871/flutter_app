@@ -4,14 +4,14 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:latlong/latlong.dart';
 
-import 'image_list_record.dart';
+import 'img_list_record.dart';
 
 part 'serializers.g.dart';
 
 const kDocumentReferenceField = 'Document__Reference__Field';
 
 @SerializersFor(const [
-  ImageListRecord,
+  ImgListRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

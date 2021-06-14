@@ -4,18 +4,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
 
-import 'schema/image_list_record.dart';
+import 'schema/img_list_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'schema/serializers.dart';
-export 'schema/image_list_record.dart';
+export 'schema/img_list_record.dart';
 
-Stream<List<ImageListRecord>> queryImageListRecord(
+Stream<List<ImgListRecord>> queryImgListRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(ImageListRecord.collection, ImageListRecord.serializer,
+    queryCollection(ImgListRecord.collection, ImgListRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

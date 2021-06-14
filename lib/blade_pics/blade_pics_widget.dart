@@ -1,6 +1,6 @@
+import '../flutter_flow/flutter_flow_drop_down_template.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,14 +17,8 @@ class BladePicsWidget extends StatefulWidget {
 }
 
 class _BladePicsWidgetState extends State<BladePicsWidget> {
-  TextEditingController textController;
+  String dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    textController = TextEditingController();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,85 +42,32 @@ class _BladePicsWidgetState extends State<BladePicsWidget> {
       body: Stack(
         children: [
           Align(
-            alignment: Alignment(0, -0.51),
+            alignment: Alignment(0, -0.9),
             child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                  child: Image.asset(
-                    'assets/images/Black on White.png',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                FlutterFlowDropDown(
+                  options: ['3', '4', '5', '6', '7', '8', '9'],
+                  onChanged: (value) {
+                    setState(() => dropDownValue = value);
                   },
-                  text: 'Blade 1',
-                  icon: Icon(
-                    Icons.add_a_photo_outlined,
-                    size: 15,
+                  width: 130,
+                  height: 40,
+                  textStyle: FlutterFlowTheme.bodyText1.override(
+                    fontFamily: 'Poppins',
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
-                  options: FFButtonOptions(
-                    width: 130,
-                    height: 40,
-                    color: FlutterFlowTheme.primaryColor,
-                    textStyle: FlutterFlowTheme.subtitle2.override(
-                      fontFamily: 'Poppins',
-                      color: Colors.white,
-                    ),
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
-                    ),
-                    borderRadius: 12,
-                  ),
+                  fillColor: Color(0xFF908991),
+                  elevation: 2,
+                  borderColor: Colors.transparent,
+                  borderWidth: 0,
+                  borderRadius: 0,
+                  margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
                 )
               ],
-            ),
-          ),
-          Align(
-            alignment: Alignment(0, -1),
-            child: TextFormField(
-              controller: textController,
-              obscureText: false,
-              decoration: InputDecoration(
-                hintText: 'enter number of blades',
-                hintStyle: FlutterFlowTheme.bodyText1.override(
-                  fontFamily: 'Poppins',
-                  color: Color(0xFF908991),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0x00000000),
-                    width: 1,
-                  ),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(4.0),
-                    topRight: Radius.circular(4.0),
-                  ),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0x00000000),
-                    width: 1,
-                  ),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(4.0),
-                    topRight: Radius.circular(4.0),
-                  ),
-                ),
-              ),
-              style: FlutterFlowTheme.bodyText1.override(
-                fontFamily: 'Poppins',
-                color: Color(0xFF908991),
-              ),
-              textAlign: TextAlign.center,
             ),
           )
         ],

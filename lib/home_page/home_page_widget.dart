@@ -1,4 +1,6 @@
+import '../backend/api_requests/api_calls.dart';
 import '../backend/firebase_storage/storage.dart';
+import '../blade_pics/blade_pics_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -16,7 +18,6 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget> {
   String uploadedFileUrl1 = '';
   String uploadedFileUrl2 = '';
-  String uploadedFileUrl3 = '';
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -107,25 +108,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         alignment: Alignment(0, 0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            final selectedMedia = await selectMedia();
-                            if (selectedMedia != null &&
-                                validateFileFormat(
-                                    selectedMedia.storagePath, context)) {
-                              showUploadMessage(context, 'Uploading file...',
-                                  showLoading: true);
-                              final downloadUrl = await uploadData(
-                                  selectedMedia.storagePath,
-                                  selectedMedia.bytes);
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                              if (downloadUrl != null) {
-                                setState(() => uploadedFileUrl2 = downloadUrl);
-                                showUploadMessage(context, 'Success!');
-                              } else {
-                                showUploadMessage(
-                                    context, 'Failed to upload media');
-                              }
-                            }
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BladePicsWidget(),
+                              ),
+                            );
                           },
                           text: 'Blades',
                           options: FFButtonOptions(
@@ -148,7 +136,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         alignment: Alignment(0, 0.4),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            final selectedMedia = await selectMedia();
+                            final selectedMedia = await selectMedia(
+                              fromCamera: true,
+                            );
                             if (selectedMedia != null &&
                                 validateFileFormat(
                                     selectedMedia.storagePath, context)) {
@@ -160,7 +150,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
                               if (downloadUrl != null) {
-                                setState(() => uploadedFileUrl3 = downloadUrl);
+                                setState(() => uploadedFileUrl2 = downloadUrl);
                                 showUploadMessage(context, 'Success!');
                               } else {
                                 showUploadMessage(
@@ -188,8 +178,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       Align(
                         alignment: Alignment(0, 0.8),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await sendPicsCall(
+                              pics: uploadedFileUrl0,
+                            );
                           },
                           text: 'Generate Report',
                           options: FFButtonOptions(
